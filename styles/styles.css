@@ -13,8 +13,8 @@ h1 {
 
   margin: 0 auto;
   box-sizing: border-box;
-  width: 600px;
-  height: 600px;
+  width: 504px;
+  height: 504px;
 
 }
 
@@ -22,12 +22,12 @@ h1 {
   background-color: #ddd;
   border: 1px solid black;
   box-sizing: border-box;
-  width: 75px;
-  height: 75px;
+  width: 63px;
+  height: 63px;
   float: left;
   display: inline-block;
   text-align: center;
-  line-height: 31px;
+  line-height: 21px;
 }
 
 #a1, #a3, #a5, #a7, #b2, #b4, #b6, #b8,

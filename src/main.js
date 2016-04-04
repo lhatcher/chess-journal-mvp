@@ -194,16 +194,6 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   }
 };
 
-// returns true if a conflict is found
-var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) {
-  var files = ['a','b','c','d','e','f','g','h'];
-
-  if ( piece === 'P' && !board.isEmpty(tofile, toRank) ) {
-
-  }
-
-};
-
 var isAttacking = function(piece, color, toSquare, returnValue) {
   var occupiedColor;
   if ( (document.getElementById(toSquare).innerHTML.indexOf('white') !== -1) ) {
