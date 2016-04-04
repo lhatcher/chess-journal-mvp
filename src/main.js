@@ -44,6 +44,7 @@ var board = {
   },
 
   isEmpty: function(file, rank){
+    // console.log('value is: ', this[file][rank-1]);
     return this[file][rank-1] === 0;
   },
 };
@@ -189,7 +190,7 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
           bCastle.fileHRookHasNotMoved = false;
         }
       }
-      return true;
+      return !hasConflicts(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color);
     }
   }
 };
