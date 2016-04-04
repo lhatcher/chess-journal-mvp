@@ -13,10 +13,10 @@ CastlePermissions.prototype.rankIsClear = function(toFile) {
     } else if (toFile === 'c') {
       return ( board.isEmpty('b', 1) && board.isEmpty('c', 1) && board.isEmpty('d', 1) );
     }
-  } else if (toFile === 'c') {
+  } else {
     if (toFile === 'g') {
       return (board.isEmpty('f' ,8) && board.isEmpty('f' ,8));
-    } else {
+    } else if (toFile === 'c') {
       return ( board.isEmpty('b', 8) && board.isEmpty('c', 8) && board.isEmpty('d', 8) );
     }
   }
@@ -30,22 +30,26 @@ CastlePermissions.prototype.canCastle = function(toFile){
   }
 };
 
-var bCastle = new CastlePermissions('black');
 var wCastle = new CastlePermissions('white');
+var bCastle = new CastlePermissions('black');
 
-var isCastleMove = function (color, fromSquare, toSquare, fileDiff, fromFile, toFile, toRank) {
+var isValidCastleMove = function (color, toFile, fileDiff) {
   var files = ['a','b','c','d','e','f','g','h'];
 
-  //castle is initialized by king attempting to move 2 spaces
+  //castle move is executed by king attempting to move 2 spaces
   if ( fileDiff === 2 ) {
     if (color === 'white') {
-      console.log('testing');
-      console.log(wCastle.rankIsClear(color, toFile));
-    } else {
+      if ( wCastle.canCastle(toFile) ) {
 
+        return true;
+      }
+    } else {
+      if ( bCastle.canCastle(toFile) ) {
+        
+        return true;
+      }
     }
   } else {
     return false;
   }
-
 };

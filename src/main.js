@@ -104,7 +104,7 @@ var movePiece = function(fromSquare, toSquare) {
       $(this).empty();
     });
     $('#' + toSquare).append(temp).hide().fadeIn(500);
-    board.movePiece(piece,toSquare[0],toSquare[1], fromSquare[0], fromSquare[1]);
+    board.movePiece(piece, toSquare[0], toSquare[1], fromSquare[0], fromSquare[1]);
     moveLog.push([fromSquare,toSquare]);
   }
 };
@@ -167,14 +167,17 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
     return ( (fromRank === toRank) || (fromFile === toFile) || (fileDiff === rankDiff) );
   }
   if ( piece === 'K' ) {
-    isCastleMove(color, fromSquare, toSquare, fileDiff, fromFile, toFile, toRank);
-    if (color === 'white') {
-      wCastle.kingHasNotMoved = false;
-    } else {
-      bCastle.kingHasNotMoved = false;
-    }
     isAttacking(piece, color, toSquare);
-    return ( rankDiff <= 1 && fileDiff <= 1 );
+    if (rankDiff <= 1 && fileDiff <= 1) {
+      if (color === 'white') {
+        wCastle.kingHasNotMoved = false;
+      } else {
+        bCastle.kingHasNotMoved = false;
+      }
+      return true;
+    } else {
+      return isValidCastleMove(color, toFile, fileDiff);
+    }
   }
   if ( piece === 'R' ) {
     isAttacking(piece, color, toSquare);
@@ -197,7 +200,6 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   }
 };
 
-
 // returns true if a conflict is found
 var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) {
   var files = ['a','b','c','d','e','f','g','h'];
@@ -207,8 +209,6 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
   }
 
 };
-
-
 
 var isAttacking = function(piece, color, toSquare, returnValue) {
   var occupiedColor;
