@@ -34,18 +34,29 @@ var wCastle = new CastlePermissions('white');
 var bCastle = new CastlePermissions('black');
 
 var isValidCastleMove = function (color, toFile, fileDiff) {
-  var files = ['a','b','c','d','e','f','g','h'];
 
   //castle move is executed by king attempting to move 2 spaces
   if ( fileDiff === 2 ) {
     if (color === 'white') {
       if ( wCastle.canCastle(toFile) ) {
-
+        if (toFile === 'g') {
+          // move h rook to f file
+          movePiece('h1', 'f1');
+        } else {
+          // move a rook to d file
+          movePiece('a1', 'd1');
+        }
         return true;
       }
     } else {
       if ( bCastle.canCastle(toFile) ) {
-        
+        if (toFile === 'g') {
+          // move h rook to f file
+          movePiece('h8', 'f8');
+        } else {
+          // move a rook to d file
+          movePiece('a8', 'd8');
+        }
         return true;
       }
     }

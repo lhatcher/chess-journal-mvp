@@ -97,7 +97,6 @@ var movePiece = function(fromSquare, toSquare) {
 
   var piece = document.getElementById(fromSquare).innerText;
   piece = piece.replace(/(\r\n|\n|\r)/gm,"");
-  // console.log(hasConflicts(fromSquare, toSquare, piece, color));
   if ( isValidMove(fromSquare, toSquare, piece, color) ) {
     var temp = document.getElementById(fromSquare).innerHTML.toString();
     $('#' + fromSquare).children().fadeOut(500, function() {
@@ -105,15 +104,10 @@ var movePiece = function(fromSquare, toSquare) {
     });
     $('#' + toSquare).append(temp).hide().fadeIn(500);
     board.movePiece(piece, toSquare[0], toSquare[1], fromSquare[0], fromSquare[1]);
-    moveLog.push([fromSquare,toSquare]);
+    moveLog.push({move: moveLog.length + 1, from: fromSquare, to: toSquare, color: color});
   }
 };
 
-
-// This function handles ONLY the direction of piece movement,
-// and validates user input. It does NOT handle collisions,
-// and conflicts. The logic found here should be used by both the
-// user, and computer players.
 var isValidMove = function(fromSquare, toSquare, piece, color) {
   if(fromSquare === toSquare) {
     return false;
