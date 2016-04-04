@@ -48,19 +48,6 @@ var board = {
   },
 };
 
-var CastlePermissions = function() {
-  this.kingHasNotMoved = true;
-  this.rookHasNotMoved = true;
-  this.rankIsClear = false;
-};
-
-CastlePermissions.prototype.canCastle = function(){
-  return this.kingHasNotMoved && this.rookHasNotMoved && this.rankIsClear;
-};
-
-var bCastle = new CastlePermissions();
-var wCastle = new CastlePermissions();
-
 var init = function() {
   populateBoard();
 };
@@ -180,13 +167,33 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
     return ( (fromRank === toRank) || (fromFile === toFile) || (fileDiff === rankDiff) );
   }
   if ( piece === 'K' ) {
-    isCastleMove();
+    isCastleMove(color, fromSquare, toSquare, fileDiff, fromFile, toFile, toRank);
+    if (color === 'white') {
+      wCastle.kingHasNotMoved = false;
+    } else {
+      bCastle.kingHasNotMoved = false;
+    }
     isAttacking(piece, color, toSquare);
     return ( rankDiff <= 1 && fileDiff <= 1 );
   }
   if ( piece === 'R' ) {
     isAttacking(piece, color, toSquare);
-    return ( fileDiff === 0 || rankDiff === 0 );
+    if (fileDiff === 0 || rankDiff === 0) {
+      if (color === 'white') {
+        if(fromFile === 'a') {
+          wCastle.fileARookHasNotMoved = false;
+        } else {
+          wCastle.fileHRookHasNotMoved = false;
+        }
+      } else {
+        if(fromFile === 'a') {
+          bCastle.fileARookHasNotMoved = false;
+        } else {
+          bCastle.fileHRookHasNotMoved = false;
+        }
+      }
+      return true;
+    }
   }
 };
 
@@ -201,9 +208,7 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
 
 };
 
-var isCastleMove = function () {
 
-};
 
 var isAttacking = function(piece, color, toSquare, returnValue) {
   var occupiedColor;
