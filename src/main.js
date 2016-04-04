@@ -28,6 +28,9 @@ $(document).ready(function(){
 var moveLog = [];
 
 var board = {
+
+  files: ['a','b','c','d','e','f','g','h'],
+
   // white --------- black
   a: ['R','P',0,0,0,0,'P','R'],
   b: ['Kn','P',0,0,0,0,'P','Kn'],
@@ -55,37 +58,37 @@ var init = function() {
 
 var populateBoard = function() {
   //pawns
-  var files = ['a','b','c','d','e','f','g','h'];
-  for (var i = 0; i < files.length; i++) {
-    $('#' + files[i] + 7).append('<p class="black">P</p>');
-    $('#' + files[i] + 2).append('<p class="white">P</p>');
+  // var files = ['a','b','c','d','e','f','g','h'];
+  for (var i = 0; i < board.files.length; i++) {
+    $('#' + board.files[i] + 7).append('<p class="black">P</p>');
+    $('#' + board.files[i] + 2).append('<p class="white">P</p>');
   }
 
   //rooks
-  $('#' + files[0] + 8).append('<p class="black">R</p>');
-  $('#' + files[7] + 8).append('<p class="black">R</p>');
-  $('#' + files[0] + 1).append('<p class="white">R</p>');
-  $('#' + files[7] + 1).append('<p class="white">R</p>');
+  $('#' + board.files[0] + 8).append('<p class="black">R</p>');
+  $('#' + board.files[7] + 8).append('<p class="black">R</p>');
+  $('#' + board.files[0] + 1).append('<p class="white">R</p>');
+  $('#' + board.files[7] + 1).append('<p class="white">R</p>');
 
   //knights
-  $('#' + files[1] + 8).append('<p class="black">Kn</p>');
-  $('#' + files[6] + 8).append('<p class="black">Kn</p>');
-  $('#' + files[1] + 1).append('<p class="white">Kn</p>');
-  $('#' + files[6] + 1).append('<p class="white">Kn</p>');
+  $('#' + board.files[1] + 8).append('<p class="black">Kn</p>');
+  $('#' + board.files[6] + 8).append('<p class="black">Kn</p>');
+  $('#' + board.files[1] + 1).append('<p class="white">Kn</p>');
+  $('#' + board.files[6] + 1).append('<p class="white">Kn</p>');
 
   // bishops
-  $('#' + files[2] + 8).append('<p class="black">B</p>');
-  $('#' + files[5] + 8).append('<p class="black">B</p>');
-  $('#' + files[2] + 1).append('<p class="white">B</p>');
-  $('#' + files[5] + 1).append('<p class="white">B</p>');
+  $('#' + board.files[2] + 8).append('<p class="black">B</p>');
+  $('#' + board.files[5] + 8).append('<p class="black">B</p>');
+  $('#' + board.files[2] + 1).append('<p class="white">B</p>');
+  $('#' + board.files[5] + 1).append('<p class="white">B</p>');
 
   // Queen
-  $('#' + files[3] + 8).append('<p class="black">Q</p>');
-  $('#' + files[3] + 1).append('<p class="white">Q</p>');
+  $('#' + board.files[3] + 8).append('<p class="black">Q</p>');
+  $('#' + board.files[3] + 1).append('<p class="white">Q</p>');
 
   // Queen
-  $('#' + files[4] + 8).append('<p class="black">K</p>');
-  $('#' + files[4] + 1).append('<p class="white">K</p>');
+  $('#' + board.files[4] + 8).append('<p class="black">K</p>');
+  $('#' + board.files[4] + 1).append('<p class="white">K</p>');
 };
 
 var movePiece = function(fromSquare, toSquare) {
@@ -113,16 +116,16 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   if(fromSquare === toSquare) {
     return false;
   }
-  var files = ['a','b','c','d','e','f','g','h'];
+  // var files = ['a','b','c','d','e','f','g','h'];
   var fromFile = fromSquare[0];
   var toFile = toSquare[0];
   var fromRank = fromSquare[1];
   var toRank = toSquare[1];
-  var fileDiff = Math.abs( files.indexOf(fromFile) - files.indexOf(toFile) );
+  var fileDiff = Math.abs( board.files.indexOf(fromFile) - board.files.indexOf(toFile) );
   var rankDiff = Math.abs( fromRank - toRank );
 
   // Invalid inputs, not a1 through h8
-  if ( files.indexOf(fromSquare[0]) === -1 || files.indexOf(toSquare[0]) === -1 ){
+  if ( board.files.indexOf(fromSquare[0]) === -1 || board.files.indexOf(toSquare[0]) === -1 ){
     alert('invalid');
     return false;
   }

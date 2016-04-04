@@ -11,13 +11,12 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
       return hasAHorizontalConflict(fromRank, fromFile, toFile);
     }
   } else if ( piece === 'B' ) {
-
+    return hasADiagonalConflict();
   }
 };
 
 var hasAVerticalConflict = function(file, fromRank, toRank) {
-
-  // determine which direction to iterate
+  // determine iteration direction
   if (fromRank < toRank) {
     for ( var i = fromRank; i < toRank; i++ ) {
       if (board[file][i] !== 0) {
@@ -35,7 +34,24 @@ var hasAVerticalConflict = function(file, fromRank, toRank) {
 };
 
 var hasAHorizontalConflict = function(rank, fromFile, toFile) {
+  var fromIndex = board.files.indexOf(fromFile);
+  var toIndex = board.files.indexOf(toFile);
 
+  //determine iteration direction
+  if (fromIndex < toIndex) {
+    for ( var i = fromIndex; i < toIndex; i++ ) {
+      if (board[board.files[i+1]][rank-1] !== 0) {
+        return true;
+      }
+    }
+  } else {
+    for ( var i = fromIndex; i > toIndex; i-- ) {
+      if (board[board.files[i-1]][rank-1]) {
+        return true;
+      }
+    }
+  }
+  return false;
 };
 
 var hasADiagonalConflict = function() {
