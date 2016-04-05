@@ -1,6 +1,6 @@
 
 
-// returns true if a conflict is found
+// returns true if a conflict of any type is found for a specific piece
 var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) {
   var files = ['a','b','c','d','e','f','g','h'];
 
@@ -11,7 +11,7 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
       return hasAHorizontalConflict(fromRank, fromFile, toFile);
     }
   } else if ( piece === 'B' ) {
-    return hasADiagonalConflict();
+    return hasADiagonalConflict(fromFile, fromRank, toFile, toRank);
   }
 };
 
@@ -54,8 +54,26 @@ var hasAHorizontalConflict = function(rank, fromFile, toFile) {
   return false;
 };
 
-var hasADiagonalConflict = function() {
+var hasADiagonalConflict = function(fromFile, fromRank, toFile, toRank) {
+  var verticalDirection = fromRank < toRank ? 'up' : 'down';
+  var horizontalDirection = fromFile < toFile ? 'right' : 'left';
+  var fileIndex = board.files.indexOf(fromFile);
 
+  if (verticalDirection === 'up') {
+    for ( var i = fromRank; i <= toRank; i++ ) {
+      if (board[board.files[fileIndex]][i-1] !== 0 && i !== fromRank) {
+        return true;
+      }
+      fileIndex = horizontalDirection === 'right' ? fileIndex + 1 : fileIndex - 1;
+    }
+  } else {
+    for ( var i = fromRank; i >= toRank; i-- ) {
+      if (board[board.files[fileIndex]][i-1] !== 0 && i !== fromRank) {
+        return true;
+      }
+      fileIndex = horizontalDirection === 'right' ? fileIndex + 1 : fileIndex - 1;
+    }
+  }
 };
 
 

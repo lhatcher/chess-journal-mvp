@@ -158,7 +158,9 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   }
   if ( piece === 'B' ) {
     isAttacking(piece, color, toSquare);
-    return fileDiff === rankDiff;
+    if (fileDiff === rankDiff) {
+      return !hasConflicts(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color);
+    }
   }
   if ( piece === 'Q') {
     isAttacking(piece, color, toSquare);
