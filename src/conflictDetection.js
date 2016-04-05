@@ -9,7 +9,22 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
       return hasAHorizontalConflict(fromRank, fromFile, toFile);
     }
   } else if ( piece === 'B' ) {
-    return hasADiagonalConflict(fromFile, fromRank, toFile, toRank);
+    if (!hasADiagonalConflict(fromFile, fromRank, toFile, toRank)) {
+      if (!board.isEmpty(toFile, toRank)) {
+        if ( color === 'white' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('black') !== -1) ) {
+          $('#' + toFile + toRank).empty();
+        } else if ( color === 'black' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('white') !== -1) ) {
+          $('#' + toFile + toRank).empty();
+        } else if ( color === 'black' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('black') !== -1) ) {
+          return true;
+        } else if ( color === 'white' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('white') !== -1) ) {
+          return true;
+        }
+      }
+      return false;
+    } else {
+      return true;
+    }
   } else if ( piece === 'Q' ) {
     if ( fileDiff === 0 ) {
       return hasAVerticalConflict(fromFile, fromRank, toRank);
@@ -66,14 +81,14 @@ var hasADiagonalConflict = function(fromFile, fromRank, toFile, toRank) {
   var fileIndex = board.files.indexOf(fromFile);
 
   if (verticalDirection === 'up') {
-    for ( var i = fromRank; i <= toRank; i++ ) {
+    for ( var i = fromRank; i < toRank; i++ ) {
       if (board[board.files[fileIndex]][i-1] !== 0 && i !== fromRank) {
         return true;
       }
       fileIndex = horizontalDirection === 'right' ? fileIndex + 1 : fileIndex - 1;
     }
   } else {
-    for ( var i = fromRank; i >= toRank; i-- ) {
+    for ( var i = fromRank; i > toRank; i-- ) {
       if (board[board.files[fileIndex]][i-1] !== 0 && i !== fromRank) {
         return true;
       }

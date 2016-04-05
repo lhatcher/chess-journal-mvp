@@ -43,7 +43,6 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
     return ( ((fileDiff === 2 && rankDiff === 1) || (fileDiff === 1 && rankDiff === 2)) );
   }
   if ( piece === 'B' ) {
-    isAttacking(piece, color, toSquare);
     if (fileDiff === rankDiff) {
       return !hasConflicts(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color);
     }
@@ -87,19 +86,22 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
 };
 
 var isAttacking = function(piece, color, toSquare, returnValue) {
+  console.log('tosq', toSquare);
   var occupiedColor;
   if ( (document.getElementById(toSquare).innerHTML.indexOf('white') !== -1) ) {
     occupiedColor = 'white';
   } else if ( ((document.getElementById(toSquare).innerHTML.indexOf('black') !== -1)) ) {
     occupiedColor = 'black';
   }
+
   if ( color === occupiedColor || !occupiedColor ) {
+    console.log(color, occupiedColor);
     return false;
-  }
-  if ( !returnValue ) {
+  } else {
     $('#' + toSquare).animate(500, function() {
       $(this).html('');
     });
+    return true;
   }
-  return true;
+
 };
