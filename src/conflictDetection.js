@@ -1,5 +1,3 @@
-
-
 // returns true if a conflict of any type is found for a specific piece
 var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) { // Does this function signature actually use all these variables???
   var files = ['a','b','c','d','e','f','g','h'];
@@ -83,15 +81,3 @@ var hasADiagonalConflict = function(fromFile, fromRank, toFile, toRank) {
     }
   }
 };
-
-
-
-
-
-
-
-
-
-// if ( piece === 'P' && !board.isEmpty(tofile, toRank) ) {
-//
-// }
