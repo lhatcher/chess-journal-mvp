@@ -4,8 +4,7 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   } else if(colorsMatch(color, toSquare[0], toSquare[1])) {
     return false;
   }
-
-
+  
   var fromFile = fromSquare[0];
   var toFile = toSquare[0];
   var fromRank = fromSquare[1];
@@ -89,7 +88,7 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
 };
 
 // TODO: FIX THIS FUNCTION. Only check for attacks after a move is validated. Currently, clicking on a queen allows a player
-// to delete opposing pieces at will 
+// to delete opposing pieces at will
 var isAttacking = function(piece, color, toSquare, returnValue) {
   var occupiedColor;
   if ( (document.getElementById(toSquare).innerHTML.indexOf('white') !== -1) ) {

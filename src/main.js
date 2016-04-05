@@ -8,7 +8,6 @@
 $(document).ready(function(){
   init();
   // {test: ['random','stuff']}
-
   var clicked = [];
 
   $('.square').on('click', function() {
@@ -113,16 +112,28 @@ var movePiece = function(fromSquare, toSquare) {
   }
 };
 
-var send = function() {
+var sendGame = function(gameName) {
   // console.log(JSON.parse([{"move":"1","from":"e2","to":"e4","color":"white"}]))
   $.ajax({
     type: 'POST',
     url: 'api/saveGame',
-    data: {moveLog: moveLog},
+    data: {name: gameName, moveLog: moveLog},
     success: function() {
       console.log('client success');
     },
     dataType: JSON
+  });
+};
+
+var retrieveGame = function(name) {
+  $.ajax({
+    type: 'GET',
+    url: '/api/loadGame',
+    data: 'gameName=' + name,
+    success: function(data) {
+      console.log(data);
+      console.log('successful GET req');
+    },
   });
 };
 

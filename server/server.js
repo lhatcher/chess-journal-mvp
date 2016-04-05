@@ -16,18 +16,34 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.post('/api/saveGame', function (req, res) {
-  saveData(req.body.moveLog, 'filename');
-  res.send(200);
+  saveGame(req.body.moveLog, req.body.name);
+  res.sendStatus(200);
 });
 
 app.get('/api/loadGame', function (req, res) {
-
+  loadGame(req.query.gameName, function(data){
+    res.json(data);
+  });
 });
 
 app.listen(8080);
 
-var saveData = function(logArray, filename) {
+var saveGame = function(logArray, filename) {
   fs.writeFile('db/logs/' + filename + '.json', JSON.stringify(logArray), function(err){
     if (err) console.error(err);
   });
 };
+
+var loadGame = function(gameName, callback) {
+  fs.readFile('db/logs/' + gameName + '.json', function(err, data) {
+    if (err) console.error(err);
+    callback(JSON.parse(data));
+  });
+};
+
+
+
+
+
+
+//
