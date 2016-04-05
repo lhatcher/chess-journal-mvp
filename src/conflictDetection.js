@@ -1,7 +1,7 @@
 
 
 // returns true if a conflict of any type is found for a specific piece
-var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) {
+var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) { // Does this function signature actually use all these variables???
   var files = ['a','b','c','d','e','f','g','h'];
 
   if ( piece === 'R' ) {
@@ -12,6 +12,14 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
     }
   } else if ( piece === 'B' ) {
     return hasADiagonalConflict(fromFile, fromRank, toFile, toRank);
+  } else if ( piece === 'Q' ) {
+    if ( fileDiff === 0 ) {
+      return hasAVerticalConflict(fromFile, fromRank, toRank);
+    } else if ( rankDiff === 0 ) {
+      return hasAHorizontalConflict(fromRank, fromFile, toFile);
+    } else {
+      return hasADiagonalConflict(fromFile, fromRank, toFile, toRank);
+    }
   }
 };
 

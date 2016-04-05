@@ -82,11 +82,11 @@ var populateBoard = function() {
   $('#' + board.files[2] + 1).append('<p class="white">B</p>');
   $('#' + board.files[5] + 1).append('<p class="white">B</p>');
 
-  // Queen
+  // Queens
   $('#' + board.files[3] + 8).append('<p class="black">Q</p>');
   $('#' + board.files[3] + 1).append('<p class="white">Q</p>');
 
-  // Queen
+  // Kings
   $('#' + board.files[4] + 8).append('<p class="black">K</p>');
   $('#' + board.files[4] + 1).append('<p class="white">K</p>');
 };
@@ -164,7 +164,7 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   }
   if ( piece === 'Q') {
     isAttacking(piece, color, toSquare);
-    return ( (fromRank === toRank) || (fromFile === toFile) || (fileDiff === rankDiff) );
+    return ( ((fromRank === toRank) || (fromFile === toFile) || (fileDiff === rankDiff)) && !hasConflicts(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) );
   }
   if ( piece === 'K' ) {
     isAttacking(piece, color, toSquare);
