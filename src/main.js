@@ -1,6 +1,5 @@
 // TODO
 // En passant
-// Castling
 // Check
 // Check mate
 // Implement conflict checker
@@ -8,6 +7,7 @@
 
 $(document).ready(function(){
   init();
+  // {test: ['random','stuff']}
 
   var clicked = [];
 
@@ -113,6 +113,16 @@ var movePiece = function(fromSquare, toSquare) {
   }
 };
 
+var send = function() {
+  $.ajax({
+    type: 'POST',
+    url: 'api/test',
+    data: {moveLog: moveLog},
+    success: function() {
+      console.log('client success');
+    }
+  });
+};
 
 
 

@@ -1,0 +1,17 @@
+
+
+DROP TABLE IF EXISTS `game_data`;
+
+-- CREATE TABLE `game_data` (
+--   `id` INT AUTO_INCREMENT,
+--   `move_file` VARCHAR(50) NULL DEFAULT NULL,
+--   `user` VARCHAR(30) NULL DEFAULT NULL,
+--   PRIMARY KEY (`id`)
+-- );
+
+CREATE TABLE `game_data` (
+  `id` INTEGER PRIMARY KEY NOT NULL,
+  `move_file` VARCHAR(50) NULL DEFAULT NULL,
+  `user` VARCHAR(30) NULL DEFAULT NULL
+  -- PRIMARY KEY (`id`)
+);
