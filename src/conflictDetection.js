@@ -9,15 +9,11 @@ var hasConflicts = function(fromFile, toFile, fromRank, toRank, fileDiff, rankDi
       return hasAHorizontalConflict(fromRank, fromFile, toFile);
     }
   } else if ( piece === 'B' ) {
-    if (!hasADiagonalConflict(fromFile, fromRank, toFile, toRank)) {
-      if (!board.isEmpty(toFile, toRank)) {
-        if ( color === 'white' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('black') !== -1) ) {
+    if ( !hasADiagonalConflict(fromFile, fromRank, toFile, toRank) ) {
+      if ( !board.isEmpty(toFile, toRank) ) {
+        if ( !colorsMatch(color, toFile, toRank) ) {
           $('#' + toFile + toRank).empty();
-        } else if ( color === 'black' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('white') !== -1) ) {
-          $('#' + toFile + toRank).empty();
-        } else if ( color === 'black' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('black') !== -1) ) {
-          return true;
-        } else if ( color === 'white' &&  (document.getElementById(toFile+toRank).innerHTML.indexOf('white') !== -1) ) {
+        } else {
           return true;
         }
       }
@@ -96,3 +92,18 @@ var hasADiagonalConflict = function(fromFile, fromRank, toFile, toRank) {
     }
   }
 };
+
+var colorsMatch = function(color, toFile, toRank) {
+  var opposingColor;
+  if (document.getElementById(toFile+toRank).innerHTML.indexOf('white') !== -1) {
+    opposingColor = 'white';
+  } else if (document.getElementById(toFile+toRank).innerHTML.indexOf('black') !== -1) {
+    opposingColor = 'black';
+  }
+
+  if (color === undefined || opposingColor === undefined) {
+    throw 'Unspecified Color Error: expected undefined to be black or white';
+  } else {
+    return color === opposingColor;
+  }
+}

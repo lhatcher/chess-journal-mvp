@@ -8,7 +8,7 @@
 
 $(document).ready(function(){
   init();
-
+  
   var clicked = [];
 
   $('.square').on('click', function() {
