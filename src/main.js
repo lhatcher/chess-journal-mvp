@@ -114,13 +114,15 @@ var movePiece = function(fromSquare, toSquare) {
 };
 
 var send = function() {
+  // console.log(JSON.parse([{"move":"1","from":"e2","to":"e4","color":"white"}]))
   $.ajax({
     type: 'POST',
-    url: 'api/test',
+    url: 'api/saveGame',
     data: {moveLog: moveLog},
     success: function() {
       console.log('client success');
-    }
+    },
+    dataType: JSON
   });
 };
 
