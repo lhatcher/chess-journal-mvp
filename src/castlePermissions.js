@@ -33,8 +33,11 @@ CastlePermissions.prototype.canCastle = function(toFile){
 var wCastle = new CastlePermissions('white');
 var bCastle = new CastlePermissions('black');
 
-var isValidCastleMove = function (color, toFile, fileDiff) {
 
+// if it is determined that a castle move is possible, this function will go ahead
+// and move the rook. The king - being the piece that initialized the castle move -
+// will be moved in main.js, as a result of returning true from this function.
+var isValidCastleMove = function (color, toFile, fileDiff) {
   //castle move is executed by king attempting to move 2 spaces
   if ( fileDiff === 2 ) {
     if (color === 'white') {

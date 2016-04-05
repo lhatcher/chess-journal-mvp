@@ -8,7 +8,7 @@
 
 $(document).ready(function(){
   init();
-  
+
   var clicked = [];
 
   $('.square').on('click', function() {
@@ -108,6 +108,7 @@ var movePiece = function(fromSquare, toSquare) {
     });
     $('#' + toSquare).append(temp).hide().fadeIn(500);
     board.movePiece(piece, toSquare[0], toSquare[1], fromSquare[0], fromSquare[1]);
+    $('#' + fromSquare).empty();
     moveLog.push({move: moveLog.length + 1, from: fromSquare, to: toSquare, color: color});
   }
 };

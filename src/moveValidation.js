@@ -49,6 +49,7 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
   }
   if ( piece === 'Q') {
     isAttacking(piece, color, toSquare);
+    console.log(hasConflicts(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color));
     return ( ((fromRank === toRank) || (fromFile === toFile) || (fileDiff === rankDiff)) && !hasConflicts(fromFile, toFile, fromRank, toRank, fileDiff, rankDiff, piece, color) );
   }
   if ( piece === 'K' ) {
@@ -86,7 +87,6 @@ var isValidMove = function(fromSquare, toSquare, piece, color) {
 };
 
 var isAttacking = function(piece, color, toSquare, returnValue) {
-  console.log('tosq', toSquare);
   var occupiedColor;
   if ( (document.getElementById(toSquare).innerHTML.indexOf('white') !== -1) ) {
     occupiedColor = 'white';
@@ -95,7 +95,6 @@ var isAttacking = function(piece, color, toSquare, returnValue) {
   }
 
   if ( color === occupiedColor || !occupiedColor ) {
-    console.log(color, occupiedColor);
     return false;
   } else {
     $('#' + toSquare).animate(500, function() {
