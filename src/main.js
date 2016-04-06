@@ -109,11 +109,11 @@ var movePiece = function(fromSquare, toSquare) {
     board.movePiece(piece, toSquare[0], toSquare[1], fromSquare[0], fromSquare[1]);
     $('#' + fromSquare).empty();
     moveLog.push({move: moveLog.length + 1, from: fromSquare, to: toSquare, color: color});
+
   }
 };
 
 var sendGame = function(gameName) {
-  // console.log(JSON.parse([{"move":"1","from":"e2","to":"e4","color":"white"}]))
   $.ajax({
     type: 'POST',
     url: 'api/saveGame',
@@ -125,18 +125,30 @@ var sendGame = function(gameName) {
   });
 };
 
-var retrieveGame = function(name) {
+var retrieveGame = function(name, callback) {
   $.ajax({
     type: 'GET',
     url: '/api/loadGame',
     data: 'gameName=' + name,
     success: function(data) {
+      callback(data);
       console.log(data);
       console.log('successful GET req');
     },
   });
 };
 
+var save = function() {
+  var filename = prompt('Enter a title for this game:');
+  sendGame(filename);
+};
+
+var load = function () {
+  var filename = prompt('Enter a game title to retrieve:');
+  retrieveGame(filename, function(data){
+    moveLog = data;
+  });
+};
 
 
 

@@ -1,21 +1,21 @@
 body {
   background-color: #087986;
   position: absolute;
-  margin-left: 20px;
+  margin-left: 125px;
 }
 
 h1 {
   font-family: helvetica;
   color: white;
+  text-align: center;
 }
 
 .board {
-
   margin: 0 auto;
   box-sizing: border-box;
   width: 504px;
   height: 504px;
-
+  float: left;
 }
 
 .square {
@@ -37,6 +37,17 @@ h1 {
   background-color: #aaa;
 }
 
+.right-div {
+  background-color: lightgrey;
+  margin-left: 10px;
+  box-sizing: border-box;
+  width: 504px;
+  height: 504px;
+  float: right;
+  border: 1px solid black;
+  padding: 25px;
+}
+
 .clicked {
   border-radius: 12px;
   border-style: dotted;
@@ -51,4 +62,17 @@ div > p {
 
 .black {
   text-shadow: 5px 2px red;
+}
+
+.move-div {
+  padding: 5px;
+  margin: 5px;
+  text-align: center;
+  background-color: #088654;
+}
+
+.move {
+  font-family: arial;
+  text-align: center;
+  color: white;
 }

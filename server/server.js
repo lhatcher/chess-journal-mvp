@@ -23,7 +23,7 @@ app.post('/api/saveGame', function (req, res) {
 app.get('/api/loadGame', function (req, res) {
   loadGame(req.query.gameName, function(data){
     res.json(data);
-  });
+  });  
 });
 
 app.listen(8080);

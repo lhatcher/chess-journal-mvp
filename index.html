@@ -3,13 +3,9 @@
   <head>
     <title>Chess</title>
     <link rel="stylesheet" type="text/css" href="styles/styles.css" />
-    <script src="lib/jquery.js"></script>
-    <script src="src/main.js"></script>
-    <script src="src/castlePermissions.js"></script>
-    <script src="src/conflictDetection.js"></script>
-    <script src="src/moveValidation.js"></script>
+
   </head>
-  <body>
+  <body ng-app="moveList" ng-controller="moveListController">
   <h1>Chess Journal</h1>
     <div class="board">
       <!-- row eight -->
@@ -36,5 +32,22 @@
       <!-- row one -->
       <div class="square" id="a1"></div><div class="square" id="b1"></div><div class="square" id="c1"></div><div class="square" id="d1"></div><div class="square" id="e1"></div><div class="square" id="f1"></div><div class="square" id="g1"></div><div class="square" id="h1"></div>
     </div>
+    <div class="right-div">
+      <div class="move-div">
+        <button ng-click="reloadData()">Display Current Game Log</button><button onClick="save()">Save Game</button><button onClick="load()">Download Previous Game</button>
+      </div>
+
+      <div class="move-div" ng-repeat="i in items"><span class="move">Move #: {{ i.move }} | Color: {{ i.color }} | From: {{ i.from }} | To: {{ i.to }}</span></div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="src/angularComponent.js"></script>
+    <script src="lib/jquery.js"></script>
+    <script src="src/main.js"></script>
+    <script src="src/castlePermissions.js"></script>
+    <script src="src/conflictDetection.js"></script>
+    <script src="src/moveValidation.js"></script>
   </body>
 </html>
